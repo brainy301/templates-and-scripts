@@ -1,6 +1,17 @@
 # Good to know:
 # Select all properties of an object: (Get-Item -Path ".\") | Select-Object -Property *
-# Clone git repository: git clone https://github.com/brainy301/templates-and-scripts.git
+# git: 
+# 	git clone https://github.com/brainy301/templates-and-scripts.git
+#	git add *
+#	git status
+#	git config --global user.name ""
+#	git config --global user.name
+#	git config --global user.email ""
+#	git commit -a -m "Some message"
+#	git remote -v
+#	git config credential.helper store
+#	git push origin master
+#	git pull
 
 # Config:
 $FolderName = (Get-Item -Path ".\").Name
