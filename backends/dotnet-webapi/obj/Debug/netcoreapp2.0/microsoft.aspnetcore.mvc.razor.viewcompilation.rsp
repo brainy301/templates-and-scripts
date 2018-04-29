@@ -1,0 +1,5 @@
+D:\#\Kirk\Desktop\templates-and-scripts\backends\dotnet-webapi
+--output-path=obj\Debug\netcoreapp2.0\
+--application-name=dotnet-webapi
+--content-root=D:\#\Kirk\Desktop\templates-and-scripts\backends\dotnet-webapi
+--file=
