@@ -59,6 +59,7 @@ if(!(Test-Path -Path ("$FolderPath\.gitignore"))){
 /node_modules
 /npm-debug.log
 /bower_components
+bower.json
 "
 	Set-Content -Path ("$FolderPath\.gitignore") -Value $Content
 }
