@@ -33,35 +33,49 @@ namespace dotnet_webapi.Controllers
 
         // GET api/tasks/getopentasks
         [HttpGet("getopentasks")]
-        public IEnumerable<TaskItem> GetOpenTasks(string filename)
+        public IEnumerable<TaskItemView> GetOpenTasks(string filename)
         {
             var file = ItemsManager.GetFiles().FirstOrDefault(f => f.Name == filename);
             if (file == null)
                 return null;
             if (!file.IsEncrypted)
                 ItemsManager.LoadFile(filename, null);
-            return file.Items.Where(i => i.ItemType == ItemTypes.Task && (i.ItemObject as TaskItem).IsClosed == false)
-                .Select(i => i.ItemObject as TaskItem)
-                .ToList();
+            var items = TasksManager.GetFirstLevelItems(file, false);
+            TasksManager.SetChildItems(file, items, false);
+            return items;
         }
 
         // GET api/tasks/getclosedtasks
         [HttpGet("getclosedtasks")]
-        public IEnumerable<TaskItem> GetClosedTasks(string filename)
+        public IEnumerable<TaskItemByDateView> GetClosedTasks(string filename)
         {
             var file = ItemsManager.GetFiles().FirstOrDefault(f => f.Name == filename);
             if (file == null)
                 return null;
             if (!file.IsEncrypted)
                 ItemsManager.LoadFile(filename, null);
-            return file.Items.Where(i => i.ItemType == ItemTypes.Task && (i.ItemObject as TaskItem).IsClosed == true)
-                .Select(i => i.ItemObject as TaskItem)
-                .ToList();
+            var items = TasksManager.GetFirstLevelItems(file, null);
+            TasksManager.SetChildItems(file, items, true);
+            TasksManager.FilterClosedItems(items);
+            var grouped = items
+                .GroupBy(k => k.MostRecentCompletedOnDate, v => v);
+            var list = new List<TaskItemByDateView>();
+            foreach (var gr in grouped)
+            {
+                var newGr = new TaskItemByDateView()
+                {
+                    Date = gr.Key,
+                    Tasks = gr.ToList(),
+                    CompletedCount = gr.ToList().Sum(s=> s.CompletedCount)
+                };
+                list.Add(newGr);
+            }
+            return list;
         }
 
         // GET api/tasks/addtask
         [HttpGet("addtask")]
-        public Item AddTask(string filename, string task)
+        public Item AddTask(string filename, string task, string parentid)
         {
             var file = ItemsManager.GetFiles().FirstOrDefault(f => f.Name == filename);
             if (file == null)
@@ -75,10 +89,11 @@ namespace dotnet_webapi.Controllers
                 ItemObject = new TaskItem()
                 {
                     ID = id,
+                    ParentID = !string.IsNullOrEmpty(parentid) ? (Guid?)Guid.Parse(parentid) : null,
                     Status = TaskStatuses.New,
                     Text = task
                 }
-            };
+            };            
             file.Items.Add(item);
             return item;
         }

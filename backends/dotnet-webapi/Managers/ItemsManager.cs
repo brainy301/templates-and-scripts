@@ -21,43 +21,54 @@ namespace dotnet_webapi
 			{
 				if (_files.Any(f=> f.Path == filePath))
 					continue;
-				
-				string text = File.ReadAllText(filePath, System.Text.Encoding.UTF8);
-				int newlineIndex = text.IndexOf("\n");
-				if (newlineIndex == -1)
-					continue;
-							
-				ItemizedFile file = new ItemizedFile();
-				file.Name = Path.GetFileName(filePath);
-				file.Path = filePath;
-				
-				// Header
-				string header = text.Substring(0, newlineIndex);				
-				string[] parts = header.Split(';');
-				for (int i=0; i<parts.Length; i++)
-				{
-					if (i==0)
-						file.Version = int.Parse(parts[i]);
-					else if (i==1)
-						file.IsEncrypted = bool.Parse(parts[i]);
-				}
-				
-				// Body
-				string body = text.Substring(newlineIndex+1).Trim();
-				file.Body = body;
-				
+
+                ItemizedFile file = new ItemizedFile();
+                file.Name = Path.GetFileName(filePath);
+                file.Path = filePath;
+                if (!Readfile(file))
+                    continue;
+                				
 				_files.Add(file);
 			}
 			return _files;
         }
+
+        private static bool Readfile(ItemizedFile file)
+        {
+            string text = File.ReadAllText(file.Path, System.Text.Encoding.UTF8);
+            int newlineIndex = text.IndexOf("\n");
+            if (newlineIndex == -1)
+                return false;
+
+            // Header
+            string header = text.Substring(0, newlineIndex);
+            string[] parts = header.Split(';');
+            for (int i = 0; i < parts.Length; i++)
+            {
+                if (i == 0)
+                    file.Version = int.Parse(parts[i]);
+                else if (i == 1)
+                    file.IsEncrypted = bool.Parse(parts[i]);
+            }
+
+            // Body
+            string body = text.Substring(newlineIndex + 1).Trim();
+            file.Body = body;
+            return true;
+        }
 		
-		public static bool LoadFile(string name, string password)
+		public static bool LoadFile(string name, string password, bool reload = false)
 		{
 			var file = ItemsManager.GetFiles().FirstOrDefault(f=> f.Name == name);
 			if (file == null)
 				return false;
-			if (file.Items != null)
+			if (!reload && file.Items != null)
 				return true;
+            if (reload)
+            {
+                if (!Readfile(file))
+                    return false;
+            }
 			if (!string.IsNullOrEmpty(password))
 			{
 				try

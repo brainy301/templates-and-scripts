@@ -24,6 +24,15 @@ namespace dotnet_webapi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            // Add service and create Policy with options
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,6 +42,9 @@ namespace dotnet_webapi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // global policy - assign here or on each controller
+            app.UseCors("CorsPolicy");
 
             app.UseMvc();
         }

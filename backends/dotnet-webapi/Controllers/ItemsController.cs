@@ -51,6 +51,13 @@ namespace dotnet_webapi.Controllers
 			return ItemsManager.LoadFile(name, password);
         }
 
+        // GET api/items/reloadfile
+        [HttpGet("reloadfile")]
+        public bool ReloadFile(string name, string password)
+        {
+            return ItemsManager.LoadFile(name, password, true);
+        }
+
 
         // GET api/items/savefile
         [HttpGet("savefile")]

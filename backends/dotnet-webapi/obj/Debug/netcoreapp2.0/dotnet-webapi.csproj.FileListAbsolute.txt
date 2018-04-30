@@ -9,3 +9,14 @@ D:\#\Kirk\Desktop\templates-and-scripts\backends\dotnet-webapi\obj\Debug\netcore
 D:\#\Kirk\Desktop\templates-and-scripts\backends\dotnet-webapi\obj\Debug\netcoreapp2.0\dotnet-webapi.dll
 D:\#\Kirk\Desktop\templates-and-scripts\backends\dotnet-webapi\obj\Debug\netcoreapp2.0\dotnet-webapi.pdb
 D:\#\Kirk\Desktop\templates-and-scripts\backends\dotnet-webapi\obj\Debug\netcoreapp2.0\dotnet-webapi.csprojResolveAssemblyReference.cache
+X:\Github\templates-and-scripts\backends\dotnet-webapi\bin\Debug\netcoreapp2.0\dotnet-webapi.deps.json
+X:\Github\templates-and-scripts\backends\dotnet-webapi\bin\Debug\netcoreapp2.0\dotnet-webapi.runtimeconfig.json
+X:\Github\templates-and-scripts\backends\dotnet-webapi\bin\Debug\netcoreapp2.0\dotnet-webapi.runtimeconfig.dev.json
+X:\Github\templates-and-scripts\backends\dotnet-webapi\bin\Debug\netcoreapp2.0\dotnet-webapi.dll
+X:\Github\templates-and-scripts\backends\dotnet-webapi\bin\Debug\netcoreapp2.0\dotnet-webapi.pdb
+X:\Github\templates-and-scripts\backends\dotnet-webapi\obj\Debug\netcoreapp2.0\dotnet-webapi.csprojResolveAssemblyReference.cache
+X:\Github\templates-and-scripts\backends\dotnet-webapi\obj\Debug\netcoreapp2.0\dotnet-webapi.csproj.CoreCompileInputs.cache
+X:\Github\templates-and-scripts\backends\dotnet-webapi\obj\Debug\netcoreapp2.0\dotnet-webapi.AssemblyInfoInputs.cache
+X:\Github\templates-and-scripts\backends\dotnet-webapi\obj\Debug\netcoreapp2.0\dotnet-webapi.AssemblyInfo.cs
+X:\Github\templates-and-scripts\backends\dotnet-webapi\obj\Debug\netcoreapp2.0\dotnet-webapi.dll
+X:\Github\templates-and-scripts\backends\dotnet-webapi\obj\Debug\netcoreapp2.0\dotnet-webapi.pdb

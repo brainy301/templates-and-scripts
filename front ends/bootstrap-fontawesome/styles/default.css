@@ -1,0 +1,29 @@
+.tab-pane {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.subtasktext {
+	padding-left: 30px;
+}
+
+i.fa-check, i.fa-trash-o {
+	cursor: pointer;
+}
+
+.completedDateEnd {
+	margin-bottom: 15px;
+}
+
+.completedDate {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.task:hover {
+	background-color: lightblue;
+}
+
+.notcomplete {
+	font-style: italic;
+}

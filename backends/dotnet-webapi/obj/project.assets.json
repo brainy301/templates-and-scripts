@@ -7470,7 +7470,7 @@
       ]
     },
     "Remotion.Linq/2.1.1": {
-      "sha512": "hPbujomsrc8tJNZD1vjE6inOBXMH8RRrQmRDjXOSyy9INLstybgsWfMtVI+KlAjtbMkFANMjDUgGRZKwyH9jQg==",
+      "sha512": "IJn0BqkvwEDpP+2qjvci7n4/a9f7DhKESLWb2/uG4xQh3rTkGTBUz69bI4IivCoKkTFAqjXxYDZw2K/npohjsw==",
       "type": "package",
       "path": "remotion.linq/2.1.1",
       "files": [
@@ -12274,30 +12274,30 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Rolf\\.nuget\\packages\\": {},
+    "C:\\Users\\rolf.becker\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\#\\Kirk\\Desktop\\templates-and-scripts\\backends\\dotnet-webapi\\dotnet-webapi.csproj",
+      "projectUniqueName": "X:\\Github\\templates-and-scripts\\backends\\dotnet-webapi\\dotnet-webapi.csproj",
       "projectName": "dotnet-webapi",
-      "projectPath": "D:\\#\\Kirk\\Desktop\\templates-and-scripts\\backends\\dotnet-webapi\\dotnet-webapi.csproj",
-      "packagesPath": "C:\\Users\\Rolf\\.nuget\\packages\\",
-      "outputPath": "D:\\#\\Kirk\\Desktop\\templates-and-scripts\\backends\\dotnet-webapi\\obj\\",
+      "projectPath": "X:\\Github\\templates-and-scripts\\backends\\dotnet-webapi\\dotnet-webapi.csproj",
+      "packagesPath": "C:\\Users\\rolf.becker\\.nuget\\packages\\",
+      "outputPath": "X:\\Github\\templates-and-scripts\\backends\\dotnet-webapi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Rolf\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\rolf.becker\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
-        "C:\\Program Files\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

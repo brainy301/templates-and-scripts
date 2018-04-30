@@ -8,65 +8,79 @@
 	<link rel="shortcut icon" href="images/favicon.ico">
 	<link href="styles/default.css" rel="stylesheet"/>	
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>	
-	<script type="text/javascript" src="scripts/default.js"></script>		
+	<script type="text/javascript" src="bower_components/popper.js/dist/umd/popper.min.js"></script>		
+	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>		
+	<script type="text/javascript" src="scripts/default.js"></script>	
   </head>
   <body>
   
-	<!-- Common icons -->
-	Add: <i class="fa fa-plus" aria-hidden="true"></i> <br />
-	Edit: <i class="fa fa-pencil" aria-hidden="true"></i> <br />
-	Delete: <i class="fa fa-trash-o" aria-hidden="true"></i> <br />
-	Search: <i class="fa fa-search" aria-hidden="true"></i> <br />
-	Search 2: <i class="fa fa-search-plus" aria-hidden="true"></i> <br />	
-	Expand 1: <i class="fa fa-expand" aria-hidden="true"></i> <br />
-	Expand 2: <i class="fa fa-arrows-alt" aria-hidden="true"></i> <br />
-	Left: <i class="fa fa-arrow-left" aria-hidden="true"></i> <br />
-	Right: <i class="fa fa-arrow-right" aria-hidden="true"></i> <br />
-	Up: <i class="fa fa-arrow-up" aria-hidden="true"></i> <br />
-	Down: <i class="fa fa-arrow-down" aria-hidden="true"></i> <br />
-	Save: <i class="fa fa-floppy-o" aria-hidden="true"></i> <br />
-	Refresh: <i class="fa fa-refresh-o" aria-hidden="true"></i> <br />
-	File: <i class="fa fa-file-o" aria-hidden="true"></i> <br />
-	Link: <i class="fa fa-external-link" aria-hidden="true"></i> <br />
-	
-	<i class="fa fa-refresh" aria-hidden="true"></i>
-  
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  <a class="navbar-brand" href="#">Navbar</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
+  <div id= class="alert alert-error alert-dismissible fade" style="display: none" role="alert">
+	  <strong>Error loading files</strong>
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
 	  </button>
-
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-		  <li class="nav-item active">
-			<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-		  </li>
-		  <li class="nav-item">
-			<a class="nav-link" href="#">Link</a>
-		  </li>
-		  <li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			  Dropdown
-			</a>
-			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-			  <a class="dropdown-item" href="#">Action</a>
-			  <a class="dropdown-item" href="#">Another action</a>
-			  <div class="dropdown-divider"></div>
-			  <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+  
+	<div class="container-fluid" style="margin-top:15px">
+		<!-- Load file -->
+		<div class="row">			
+			<div class="col-md-6">
+				<div class="input-group">
+					<div id="Files" class="dropdown">
+					  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Select a file
+					  </button>
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					  </div>
+					</div>	
+					&nbsp;
+					<input id="filepassword" type="password" class="form-control" />
+					&nbsp;	
+					<button id="btnLoadFile" type="button" class="btn btn-primary">Load File</button>	
+					&nbsp;
+					<button id="btnSaveFile" type="button" class="btn btn-secondary">Save File</button>
+					&nbsp;
+					<button id="btnReloadFile" type="button" class="btn btn-secondary">Reload File</button>					
+				</div>
 			</div>
-		  </li>
-		  <li class="nav-item">
-			<a class="nav-link disabled" href="#">Disabled</a>
-		  </li>
-		</ul>
-		<form class="form-inline my-2 my-lg-0">
-		  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-		  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-		</form>
-	  </div>
-	</nav>
+			<div class="col-md-2"></div>			
+			<div class="col-md-2"></div>
+		</div>				
+		
+		<!-- Tasks -->
+		<div class="row" style="margin-top: 15px; margin-bottom: 15px;">
+			<div class="col-md-12">
+				<ul class="nav nav-tabs" id="taskstab" role="tablist">
+				  <li class="nav-item">
+					<a class="nav-link active" id="opentasks-tab" data-toggle="tab" href="#opentasks" role="tab" aria-controls="opentasks" aria-selected="true">Open Tasks</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" id="closedtasks-tab" data-toggle="tab" href="#closedtasks" role="tab" aria-controls="closedtasks" aria-selected="false">Closed Tasks</a>
+				  </li>
+				</ul>
+
+				<div class="tab-content">
+				  <div class="tab-pane active container-fluid" id="opentasks" role="tabpanel" aria-labelledby="opentasks-tab">
+					<div class="input-group">
+						<input id="addtasktext" type="text" placeholder="Add task here..." class="form-control col-md-4" />
+						<input id="parenttaskid" type="text" placeholder="Parent task id..." class="form-control col-md-2" />
+						<button id="btnAddTask" type="button" class="btn btn-primary">Add</button>
+						&nbsp;
+						<button id="btnAddSameParentTask" type="button" class="btn btn-primary">Add Same Parent</button>
+					</div>
+					<div id="tasks">
+					No open tasks loaded...
+					</div>
+				  </div>
+				  <div class="tab-pane container-fluid" id="closedtasks" role="tabpanel" aria-labelledby="closedtasks-tab">
+					<div id="tasks">
+					No closed tasks loaded...
+					</div>				  				  
+				  </div>
+				</div>
+			</div>
+		</div>		
+	</div>  
   
   </body>
 </html>

@@ -46,12 +46,16 @@ bower install fontawesome#4.7.0 --save
 Write-Output 'fontawesome installed.'
 
 Write-Output 'installing bootstrap...'
-bower install bootstrap#4.1.0
+bower install bootstrap#4.1.0 --save
 Write-Output 'bootstrap installed.'
 
 Write-Output 'installing jquery...'
-bower install jquery#3.3.1
+bower install jquery#3.3.1 --save
 Write-Output 'jquery installed.'
+
+Write-Output 'installing popper...'
+bower install popper.js#1.14.3 --save
+Write-Output 'popper installed.'
 
 if(!(Test-Path -Path ("$FolderPath\.gitignore"))){
 	Write-Output "creating .gitignore file..."
