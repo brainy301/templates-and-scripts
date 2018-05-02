@@ -41,7 +41,7 @@ namespace dotnet_webapi.Controllers
             var file = ItemsManager.GetFiles().FirstOrDefault(f => f.Name == name);
             if (file == null)
                 return null;
-            return file.Items.AsQueryable().Where("sdfsdf").GroupBy("").AsEnumerable<Item>();
+            return file.Items;
         }
 
         // GET api/items/loadfile
