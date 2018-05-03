@@ -8,7 +8,15 @@ $('#myTab a').on('click', function (e) {
 // Load
 function RequestFiles()
 {
-	var jqxhr = $.ajax(API_URL + "items/getfiles" )
+	var jqxhr = $.ajax(API_URL + "items/getfiles" 
+	/*, 
+		method     : 'get',		
+		crossDomain: true,
+		contentType: 'application/json',
+		dataType   : 'json',
+		processData: false
+		}*/
+		)
 	  .done(function(data) {
 		console.log("data", data);
 				
@@ -68,14 +76,16 @@ function GetOpenTasks(reload, reloadfile) {
 				$opentasks.empty();
 				for (var i=0; i<tasksdata.length; i++) {
 					var task = tasksdata[i];
-					$opentasks.append('<div id="' + task.id + '" class="task row"><div class="col-md-11">' + task.html + '</div><div class="col-md-1"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;<i class="fa fa-trash-o" aria-hidden="true"></i></div></div>')
+					$opentasks.append('<div id="' + task.id + '" class="task row"><div class="col-md-11 tasktext">' + task.html + '</div><div class="col-md-1"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;<i class="fa fa-trash-o" aria-hidden="true"></i></div></div>')
 					for (var j=0; j<task.childItems.length; j++) {
 						var childItem = task.childItems[j];
-						$opentasks.append('<div id="' + childItem.id + '" class="task row"><div class="col-md-11 subtasktext">' + childItem.html + '</div><div class="col-md-1"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;<i class="fa fa-trash-o" aria-hidden="true"></i></div></div>')
+						$opentasks.append('<div id="' + childItem.id + '" class="task row"><div class="col-md-11 subtasktext tasktext">' + childItem.html + '</div><div class="col-md-1"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;<i class="fa fa-trash-o" aria-hidden="true"></i></div></div>')
 					}
 				}
 				$opentasks.find('.fa-trash-o').click(OnDeleteTask);
-				$opentasks.find('.fa-check').click(OnCompleteTask);				
+				$opentasks.find('.fa-check').click(OnCompleteTask);		
+				$opentasks.find('.tasktext').click(OnTaskClick);		
+				
 				console.log("tasks data", tasksdata);
 			})
 			.fail(function() {
@@ -118,16 +128,17 @@ function GetClosedTasks(reload, reloadfile) {
 					$closedtasks.append('<div class="row completedDate"><div class="col-md-12">' + taskgroup.date + ' (' + taskgroup.completedCount + ')</div></div>');
 					for (var j=0; j<taskgroup.tasks.length; j++) {
 						var task = taskgroup.tasks[j];
-						$closedtasks.append('<div id="' + task.id + '" class="task row' + (task.completedOn == null ? ' notcomplete' : '') + '"><div class="col-md-11">' + task.html + '</div><div class="col-md-1"><i class="fa fa-trash-o" aria-hidden="true"></i></div></div>')
+						$closedtasks.append('<div id="' + task.id + '" class="task row' + (task.completedOn == null ? ' notcomplete' : '') + '"><div class="tasktext col-md-11">' + task.html + '</div><div class="col-md-1"><i class="fa fa-trash-o" aria-hidden="true"></i></div></div>')
 						for (var k=0; k<task.childItems.length; k++) {
 							var childItem = task.childItems[k];
-							$closedtasks.append('<div id="' + childItem.id + '" class="task row"><div class="col-md-11 subtasktext">' + childItem.html + '</div><div class="col-md-1"><i class="fa fa-trash-o" aria-hidden="true"></i></div></div>')
+							$closedtasks.append('<div id="' + childItem.id + '" class="task row"><div class="col-md-11 subtasktext tasktext">' + childItem.html + '</div><div class="col-md-1"><i class="fa fa-trash-o" aria-hidden="true"></i></div></div>')
 						}						
 					}					
 				}
 													
 				$closedtasks.find('.fa-trash-o').click(OnDeleteTaskClosed);
-				console.log("tasks data", tasksdata);
+				$closedtasks.find('.tasktext').click(OnTaskClick);
+				console.log("tasks data", taskgroups);
 			})
 			.fail(function() {
 				alert("failed to load task data");
@@ -171,6 +182,12 @@ function OnCompleteTask() {
 	  });	
 }
 
+function OnTaskClick() {
+	var $task = $(this).parents('.task:first');
+	var id = $task.attr('id');
+	$('#taskModal').modal('show');
+}
+
 function OnAddTask(doNotClearParent) {
 	var taskText = $('#addtasktext').val();
 	var parentId = $('#parenttaskid').val();
@@ -198,6 +215,10 @@ function OnSaveFile() {
 	  });
 }
 
+var VIEW_OPEN_TASKS = 0;
+var VIEW_CLOSED_TASKS = 1;
+var currentView = VIEW_OPEN_TASKS;
+
 function OnTabShow() {
 	$('#taskstab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 		var $tab = $(e.target);
@@ -205,6 +226,10 @@ function OnTabShow() {
 		{
 			console.log('showing closed tasks')
 			GetClosedTasks(true);
+			currentView = VIEW_CLOSED_TASKS;
+			
+		} else {
+			currentView = VIEW_OPEN_TASKS;
 		}
 		console.log("tab show", e.target, e.relatedTarget);
 	});

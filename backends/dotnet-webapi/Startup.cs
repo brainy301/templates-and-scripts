@@ -28,7 +28,9 @@ namespace dotnet_webapi
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
+                    builder => builder
+					.AllowAnyOrigin()
+					//.WithOrigins("*")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());

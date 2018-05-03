@@ -37,7 +37,7 @@ namespace dotnet_webapi
             }
         }
 
-        public string MostRecentCompletedOnDate
+        public DateTime? MostRecentCompletedOnDateValue
         {
             get
             {
@@ -51,7 +51,16 @@ namespace dotnet_webapi
                     }
                 }
                 if (this.CompletedOn != null && (mostRecent == null || this.CompletedOn > mostRecent))
-                    mostRecent = this.CompletedOn;
+                    mostRecent = this.CompletedOn;                
+                return mostRecent;
+            }
+        }		
+		
+        public string MostRecentCompletedOnDate
+        {
+            get
+            {
+                DateTime? mostRecent = MostRecentCompletedOnDateValue;                
                 if (mostRecent == null)
                     return "";
                 return mostRecent.Value.ToString("ddd yyyy-MM-dd");

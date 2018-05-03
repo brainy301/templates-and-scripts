@@ -22,6 +22,7 @@ i.fa-check, i.fa-trash-o {
 
 .task:hover {
 	background-color: lightblue;
+	cursor: pointer;
 }
 
 .notcomplete {

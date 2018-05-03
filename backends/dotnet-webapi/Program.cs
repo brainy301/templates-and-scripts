@@ -18,13 +18,15 @@ namespace dotnet_webapi
         }
 
         public static IWebHost BuildWebHost(string[] args) {
-			var config = new ConfigurationBuilder()
+			var config = new ConfigurationBuilder()				
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("hosting.json", optional: false)
                 .Build();			
 			
             return WebHost.CreateDefaultBuilder(args)
 				.UseConfiguration(config)
+				//.UseKestrel()
+				//.UseIISIntegration()				
                 .UseStartup<Startup>()
                 .Build();
 		}

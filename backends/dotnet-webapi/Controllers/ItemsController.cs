@@ -79,5 +79,18 @@ namespace dotnet_webapi.Controllers
             file.Items.Remove(item);
             return true;
         }
+		
+		// GET api/items/getitem
+        [HttpGet("getitem")]
+        public Item GetItem(string name, string id)
+        {
+            var file = ItemsManager.GetFiles().FirstOrDefault(f => f.Name == filename);
+            if (file == null)
+                return null;
+            if (!file.IsEncrypted)
+                ItemsManager.LoadFile(filename, null);
+			var item = file.Items.FirstOrDefault(i=> i.ID == taskid);			
+			return item;
+        }		
     }
 }

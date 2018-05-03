@@ -43,7 +43,7 @@ namespace dotnet_webapi.Controllers
             var items = TasksManager.GetFirstLevelItems(file, false);
             TasksManager.SetChildItems(file, items, false);
             return items;
-        }
+        }	
 
         // GET api/tasks/getclosedtasks
         [HttpGet("getclosedtasks")]
@@ -57,8 +57,9 @@ namespace dotnet_webapi.Controllers
             var items = TasksManager.GetFirstLevelItems(file, null);
             TasksManager.SetChildItems(file, items, true);
             TasksManager.FilterClosedItems(items);
+			items = items.OrderByDescending(i=> i.MostRecentCompletedOnDateValue).ToList();
             var grouped = items
-                .GroupBy(k => k.MostRecentCompletedOnDate, v => v);
+                .GroupBy(k => k.MostRecentCompletedOnDate, v => v);			
             var list = new List<TaskItemByDateView>();
             foreach (var gr in grouped)
             {
